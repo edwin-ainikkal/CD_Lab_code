@@ -45,20 +45,29 @@ int HashSym(char *str){
     return hash;
 }
 
-void DisplaySym(){
-    for(int i = 0; i < TableLength; i++){
+void DisplaySym() {
+
+    printf("\n-------------------------------------------------------------\n");
+    printf("| %-10s | %-15s | %-10s | %-10s |\n",
+           "Index", "Name", "Type", "Size");
+    printf("-------------------------------------------------------------\n");
+
+    for(int i = 0; i < TableLength; i++) {
         ListElement *temp = TABLE[i];
-        if(temp != NULL){
-            printf("Index %d:\n", i);
-            while(temp != NULL){
-                printf("  Name: %s, Type: %s, ID: %d, Size: %d\n",
-                       temp->n.name, temp->n.type,
-                       temp->n.idx, temp->n.size);
-                temp = temp->next;
-            }
+
+        while(temp != NULL) {
+            printf("| %-10d | %-15s | %-10s | %-10d |\n",
+                   temp->n.idx,
+                   temp->n.name,
+                   temp->n.type,
+                   temp->n.size);
+            temp = temp->next;
         }
     }
+
+    printf("-------------------------------------------------------------\n");
 }
+
 
 int SearchSym(char *str){
     int index = HashSym(str);
